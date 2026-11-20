@@ -1,5 +1,8 @@
-USE olist;
-SHOW TABLES;
+-- =====================================================================
+-- Olist delivery analysis: exploration and analysis queries
+-- Run after 00_load_data.sql
+-- =====================================================================
+
 USE olist;
 
 -- 1. How many orders are there in each status?
