@@ -1,8 +1,8 @@
 -- =====================================================================
 -- Olist SQL project: create the database, build 8 tables, load the CSVs
 -- Run from Terminal, inside the folder that holds the CSV files:
---   /usr/local/mysql/bin/mysql --local-infile=1 -u root -p < load_olist.sql
--- (geolocation is left out on purpose; we can add it later)
+--   /usr/local/mysql/bin/mysql --local-infile=1 -u root -p < 00_load_data.sql
+-- (the geolocation file is not used in this analysis)
 -- =====================================================================
 
 SET GLOBAL local_infile = 1;
