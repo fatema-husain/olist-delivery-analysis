@@ -1,5 +1,9 @@
 # Late Deliveries and Customer Reviews: Olist E-Commerce SQL Analysis
 
+**Interactive dashboard:** [View on Tableau Public](https://public.tableau.com/app/profile/fatema.husain2917/viz/OlistDeliveryAnalysisWhatDrivesLateDeliveries/Dashboard1)
+
+![Dashboard](dashboard.png)
+
 ## Business question
 What causes late deliveries on Olist's marketplace, how much do they hurt customer reviews, and what should the business fix first?
 
@@ -9,7 +13,7 @@ What causes late deliveries on Olist's marketplace, how much do they hurt custom
 - **Analysis window:** January 2017 to August 2018. 2016 is too sparse to use (4 orders in September, none in November), so it was excluded from the main checks.
 
 ## Tools
-MySQL, MySQL Workbench, SQL (joins across 4 tables, CASE, aggregation, date functions, window functions)
+MySQL, MySQL Workbench, SQL (joins across 4 tables, CASE, aggregation, date functions, window functions), Tableau Public (calculated fields, interactive dashboard with filter actions)
 
 ## Method
 1. Built a MySQL database from 8 raw CSV files (`sql/00_load_data.sql`), handling Windows line endings, multi-line review comments, blank dates and a review ID that is not unique
@@ -24,10 +28,12 @@ MySQL, MySQL Workbench, SQL (joins across 4 tables, CASE, aggregation, date func
 3. **Most of the delay happens with the courier, not the seller.** Late orders took 5.8 days to reach the courier (vs 3.0 on time) but 25.7 days from courier to customer (vs 7.8). About 86% of the extra time is in the courier stage.
 4. **Rio de Janeiro is the clearest problem area.** Northern and north-eastern states have the highest late rates (Maranhão 19.7%, Ceará 15.3%), but they are small. São Paulo has the most late orders (about 2,390), but only because it is so large: its late rate (5.9%) is below the platform average (8.1%). Rio de Janeiro has the second-most late orders (about 1,660) and a late rate more than twice São Paulo's (13.5%), making it the state where lateness is both common and high-volume.
 5. **Distance matters, but it is not the whole story.** 60% of sellers are in São Paulo. Orders shipped across state lines were late 9.0% of the time vs 6.0% within the same state. Rio is next to São Paulo yet still has high delays, which points to a local logistics issue rather than distance.
-6. Most orders arrive within two weeks (71%), but 4.5% take more than 30 days.
+6. **When Rio orders are late, they are much worse.** Filtering the dashboard to Rio de Janeiro, 58.6% of late orders received a 1-star review (vs 46.2% overall) and late orders spent 31.3 days with the courier (vs 25.7 overall).
+7. **Late deliveries spike in busy periods:** the late rate rose to 14.3% in November 2017 and 21.4% in March 2018, against a typical 3 to 5% in mid-2017. This may be linked to peak demand (November includes Black Friday), but order volume has not yet been checked against it.
+8. Most orders arrive within two weeks (71%), but 4.5% take more than 30 days.
 
 ## Recommendations
-1. **Review courier performance in Rio first.** RRio has the second-highest number of late orders (about 1,660) and a late rate more than twice São Paulo's, so it is where a fix would help the most customers. São Paulo has more late orders in total, but its late rate is already below average.
+1. **Review courier performance in Rio first.** Rio has the second-highest number of late orders (about 1,660) and a late rate more than twice São Paulo's, so it is where a fix would help the most customers. São Paulo has more late orders in total, but its late rate is already below average. Rio is also close to São Paulo, where most sellers are based, so distance alone does not explain the delays. I would review courier performance and delivery agreements in Rio first, then investigate routes to the North-East, where late-delivery rates are higher.
 2. **Set a target for sellers to hand over orders within 3 days.** On-time orders reach the courier in about 3 days on average. Olist could use this as a target and flag sellers who regularly take longer, so delays can be addressed before they affect delivery.
 3. **Inform customers before their orders become late.** If an order has not reached the courier within 5 days, Olist could automatically send a delay notification. In some cases, it could also offer a small voucher to improve the customer experience and reduce negative reviews.
 
@@ -46,6 +52,8 @@ Track Rio's late-delivery rate and the percentage of 1-star reviews each month a
 sql/
   00_load_data.sql      creates the database and loads the CSV files
   01_exploration.sql    exploration and analysis queries
+  02_dashboard_dataset.sql   builds the one-row-per-order dataset used in Tableau
+dashboard.png           screenshot of the Tableau dashboard
 README.md
 ```
 
@@ -54,3 +62,4 @@ README.md
 2. Place `00_load_data.sql` in the same folder
 3. From that folder, run: `mysql --local-infile=1 -u root -p < 00_load_data.sql`
 4. Open `01_exploration.sql` in MySQL Workbench and run the queries
+MySQL Workbench and run the queries
