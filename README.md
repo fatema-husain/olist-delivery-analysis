@@ -1,4 +1,4 @@
-# Late Deliveries and Customer Reviews: Olist E-Commerce SQL Analysis
+# Late Deliveries and Customer Reviews: Olist E-Commerce SQL and Tableau Analysis
 
 **Interactive dashboard:** [View on Tableau Public](https://public.tableau.com/app/profile/fatema.husain2917/viz/OlistDeliveryAnalysisWhatDrivesLateDeliveries/Dashboard1)
 
