@@ -62,4 +62,3 @@ README.md
 2. Place `00_load_data.sql` in the same folder
 3. From that folder, run: `mysql --local-infile=1 -u root -p < 00_load_data.sql`
 4. Open `01_exploration.sql` in MySQL Workbench and run the queries
-MySQL Workbench and run the queries
